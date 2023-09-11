@@ -1,12 +1,12 @@
 [
     {
         "id": 0,
-      "name": "First task",
+      "name": "First server",
       "description": "idk"
     },
     {
         "id": 1,
-      "name": "Second task",
+      "name": "Second server",
       "description": "idk"
     }
 ]
