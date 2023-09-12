@@ -42,7 +42,10 @@
         class="tableEl mb-6 mt-6 rounded-lg"
       ></v-data-table>
     </v-col>
-    <dialog-component v-model="showDialog"></dialog-component>
+    <dialog-component
+      v-model="showDialog"
+      :element="clicedElement"
+    ></dialog-component>
   </v-row>
 </template>
 
@@ -54,6 +57,7 @@ export default {
       servers: null,
       apps: null,
       tasks: null,
+      clicedElement: null,
       showDialog: false,
       headersServ: [
         {
@@ -109,7 +113,8 @@ export default {
     handleShowServerDetails(item) {},
 
     handleAddServer() {
-      this.showDialog = true
+      this.showDialog = !this.showDialog
+      this.clicedElement = 'server'
     },
   },
 }
