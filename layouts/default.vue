@@ -78,12 +78,16 @@ export default {
         },
         {
           icon: 'mdi-chart-bubble',
-          title: 'Server',
-          to: '/server',
+          title: 'Serwery',
+          to: '/servers',
         },
         {
-          title: 'Task',
+          title: 'Taski',
           to: '/tasks',
+        },
+        {
+          title: 'Aplikacje',
+          to: '/apps',
         },
       ],
       miniVariant: false,

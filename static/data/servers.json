@@ -2,11 +2,13 @@
     {
         "id": 0,
       "name": "First server",
-      "description": "idk"
+      "description": "idk",
+      "date": "12-09-2023"
     },
     {
         "id": 1,
       "name": "Second server",
-      "description": "idk"
+      "description": "idk",
+      "date": "12-09-2023"
     }
 ]
