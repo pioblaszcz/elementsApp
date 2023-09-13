@@ -1,0 +1,81 @@
+{
+  "servers": [
+    {
+      "id": 0,
+      "type": "server",
+      "name": "First server",
+      "description": "idk",
+      "date": "12-09-2023"
+    },
+    {
+      "id": 1,
+      "name": "Second server",
+      "type": "server",
+      "description": "idk",
+      "date": "12-09-2023"
+    },
+    {
+      "name": "Nowy serwer",
+      "description": "aktualniejszy",
+      "type": "server",
+      "date": "13-09-2023 ",
+      "id": 2
+    },
+    {
+      "name": "Nowy serwer 2",
+      "description": "inny nowy serwer 273y6rwe",
+      "type": "server",
+      "date": "13-09-2023 ",
+      "id": 3,
+      "serverId": null,
+      "appId": null
+    }
+  ],
+  "apps": [
+    {
+      "name": "nowa nazwa",
+      "description": "pierwsza aplikacja",
+      "type": "app",
+      "serverId": 2,
+      "date": "13-09-2023 ",
+      "id": 1,
+      "appId": null
+    },
+    {
+      "name": "Normalna",
+      "description": "Aplikacja",
+      "type": "app",
+      "serverId": 3,
+      "date": "13-09-2023 ",
+      "id": 2
+    },
+    {
+      "name": "nfh",
+      "description": "",
+      "type": "app",
+      "serverId": 0,
+      "date": "13-09-2023 ",
+      "id": 3
+    }
+  ],
+  "tasks": [
+    {
+      "name": "Nowy task",
+      "description": "",
+      "type": "task",
+      "serverId": 3,
+      "appId": 1,
+      "date": "13-09-2023 ",
+      "id": 1
+    },
+    {
+      "name": "New task 2",
+      "description": "asdasd",
+      "type": "task",
+      "serverId": 0,
+      "appId": 1,
+      "date": "13-09-2023 ",
+      "id": 2
+    }
+  ]
+}

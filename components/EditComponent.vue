@@ -1,30 +1,30 @@
 <template>
   <v-dialog
-    v-model="dialog"
+    v-model="edit"
     transition="dialog-bottom-transition"
     max-width="600"
   >
-    <v-card v-if="element && serverItems">
-      <v-toolbar :color="element.color" dark>
-        <p class="font-weight-medium text-center title">{{ element.title }}</p>
+    <v-card>
+      <v-toolbar :color="color" dark>
+        <p class="font-weight-medium text-center title">Edytuj element</p>
       </v-toolbar>
       <v-form ref="form" lazy-validation class="form">
         <v-text-field
-          v-model="inputName"
+          v-model="name"
           :counter="16"
           :rules="nameRules"
           required
           label="Nazwa"
         ></v-text-field>
         <v-text-field
-          v-model="inputDesc"
+          v-model="description"
           :counter="30"
           :rules="descriptionRules"
           required
           label="Opis"
         ></v-text-field>
         <v-select
-          v-if="element.addServer"
+          v-if="inputServerId !== null"
           required
           v-model="inputServerId"
           :rules="serverIdRules"
@@ -34,7 +34,7 @@
           label="Wybierz serwer"
         ></v-select>
         <v-select
-          v-if="element.addApp"
+          v-if="inputAppId !== null"
           required
           v-model="inputAppId"
           :items="appItems"
@@ -42,12 +42,12 @@
           item-text="name"
           label="Wybierz aplikacje"
         ></v-select>
-        <v-btn :color="element.color" class="mr-4 submit" @click="onSubmit">
-          Add
+        <v-btn :color="color" class="mr-4 submit" @click="onSubmit">
+          Edit
         </v-btn>
       </v-form>
       <v-card-actions class="justify-end">
-        <v-btn text @click="dialog = false">Close</v-btn>
+        <v-btn text @click="edit = false">Close</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -56,27 +56,30 @@
 <script>
 import {
   nameRules,
-  serverIdRules,
   descriptionRules,
+  serverIdRules,
 } from '../validation/formRules'
 
 export default {
-  name: 'DialogComponent',
+  name: 'EditComponent',
   props: {
     value: {
       type: Boolean,
       required: true,
     },
-    element: {
+    item: {
       type: Object,
-      required: false,
-      default: null,
+      required: true,
     },
     servers: {
       type: Array,
       required: true,
     },
     apps: {
+      type: Array,
+      required: true,
+    },
+    tasks: {
       type: Array,
       required: true,
     },
@@ -87,22 +90,42 @@ export default {
   },
   data() {
     return {
-      dialog: false,
+      edit: false,
+      name: '',
+      description: '',
       serverItems: null,
       appItems: null,
-      nameRules,
-      serverIdRules,
-      descriptionRules,
-      inputName: '',
-      inputDesc: '',
+      type: '',
       inputServerId: null,
       inputAppId: null,
+      id: null,
+      color: null,
+      nameRules,
+      descriptionRules,
+      serverIdRules,
     }
   },
   watch: {
     value: {
       handler() {
-        this.dialog = true
+        this.edit = true
+      },
+    },
+    item: {
+      handler() {
+        this.name = this.item.name
+        this.description = this.item.description
+        this.type = this.item.type
+        this.id = this.item.id
+        this.inputServerId =
+          this.item.type !== 'server' ? this.item.serverId : null
+        this.inputAppId = this.item.type === 'task' ? this.item.appId : null
+        this.color =
+          this.type === 'server'
+            ? 'primary'
+            : this.type === 'app'
+            ? 'green'
+            : 'red'
       },
     },
     servers: {
@@ -117,49 +140,28 @@ export default {
     },
   },
   methods: {
-    handleCreate() {
-      this.$refs.form.resetValidation()
-      const type = this.element.type
-      const day =
-        new Date().getDate() < 10
-          ? `0${new Date().getDate()}`
-          : new Date().getDate()
-
-      const month =
-        new Date().getMonth() + 1 < 10
-          ? `0${new Date().getMonth() + 1}`
-          : new Date().getMonth() + 1
-
-      const currentDate = `${day}-${month}-${new Date().getFullYear()} `
-
-      const elementBody = {
-        name: this.inputName,
-        description: this.inputDesc,
-        type: type === 'servers' ? 'server' : type === 'apps' ? 'app' : 'task',
+    handleEdit() {
+      const body = {
+        name: this.name,
+        description: this.description,
       }
 
-      if (type === 'apps' || type === 'tasks')
-        elementBody.serverId = this.inputServerId
+      if (this.serverItems) body.serverId = this.inputServerId
+      if (this.appItems) body.appId = this.inputAppId
 
-      if (this.element.type === 'tasks')
-        elementBody.appId = this.inputAppId === null ? 'brak' : this.inputAppId
-
-      elementBody.date = currentDate
-      fetch(`http://localhost:3000/${this.element.type}`, {
-        method: 'POST',
+      fetch(`http://localhost:3000/${this.type}s/${this.id}`, {
+        method: 'PATCH',
+        body: JSON.stringify(body),
         headers: {
-          'Content-Type': 'application/json',
+          'Content-type': 'application/json; charset=UTF-8',
         },
-        body: JSON.stringify(elementBody),
       }).then(() => this.upgradeFetch())
     },
-
     onSubmit() {
       this.$nextTick(() => {
         if (this.$refs.form.validate()) {
-          this.handleCreate()
-          this.dialog = false
-          this.$refs.form.reset()
+          this.handleEdit()
+          this.edit = false
         }
       })
     },
@@ -167,14 +169,4 @@ export default {
 }
 </script>
 
-<style>
-.title {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-}
-
-.form {
-  padding: 2rem;
-}
-</style>
+<style></style>

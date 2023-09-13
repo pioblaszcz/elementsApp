@@ -5,14 +5,24 @@
         color="primary"
         class="button-add"
         elevation="2"
-        @click="handleAddServer"
         x-large
+        @click="handleAdd('server')"
         >Dodaj Serwer</v-btn
       >
-      <v-btn color="green" class="button-add mt-4 mb-4" elevation="2" x-large
+      <v-btn
+        color="green"
+        class="button-add mt-4 mb-4"
+        elevation="2"
+        x-large
+        @click="handleAdd('app')"
         >Dodaj Aplikacje</v-btn
       >
-      <v-btn color="red" class="button-add" elevation="2" x-large
+      <v-btn
+        color="red"
+        class="button-add"
+        elevation="2"
+        x-large
+        @click="handleAdd('task')"
         >Dodaj Taska</v-btn
       >
     </v-col>
@@ -31,6 +41,7 @@
         :headers="headersApp"
         :items="apps"
         class="tableEl mb-6 mt-6 rounded-lg"
+        @click:row="handleShowServerDetails"
         :items-per-page="5"
       ></v-data-table>
 
@@ -39,13 +50,26 @@
         :headers="headersTask"
         :items="tasks"
         :items-per-page="5"
+        @click:row="handleShowServerDetails"
         class="tableEl mb-6 mt-6 rounded-lg"
       ></v-data-table>
     </v-col>
     <dialog-component
       v-model="showDialog"
-      :element="clicedElement"
-    ></dialog-component>
+      :element="clickedElement"
+      :servers="servers"
+      :apps="apps"
+      :upgrade-fetch="fetchData"
+    />
+    <edit-component
+      v-model="showEdit"
+      :item="itemToEdit"
+      :element="clickedElement"
+      :servers="servers"
+      :apps="apps"
+      :tasks="tasks"
+      :upgrade-fetch="fetchData"
+    />
   </v-row>
 </template>
 
@@ -54,11 +78,13 @@ export default {
   name: 'IndexPage',
   data() {
     return {
-      servers: null,
-      apps: null,
-      tasks: null,
-      clicedElement: null,
+      servers: [],
+      apps: [],
+      tasks: [],
+      clickedElement: null,
       showDialog: false,
+      showEdit: false,
+      itemToEdit: {},
       headersServ: [
         {
           text: 'Serwery',
@@ -68,7 +94,7 @@ export default {
         },
         { text: 'Opis', value: 'description' },
         { text: 'Id', value: 'id' },
-        { text: 'Data utworzenia', value: 'date' },
+        { text: 'Data modyfikacji', value: 'date' },
       ],
       headersApp: [
         {
@@ -80,7 +106,7 @@ export default {
         { text: 'Opis', value: 'description' },
         { text: 'Id', value: 'id' },
         { text: 'Id serwera', value: 'serverId' },
-        { text: 'Data utworzenia', value: 'date' },
+        { text: 'Data modyfikacji', value: 'date' },
       ],
       headersTask: [
         {
@@ -90,43 +116,77 @@ export default {
           value: 'name',
         },
         { text: 'Opis', value: 'description' },
-        { text: 'Id', value: 'id' },
         { text: 'Id serwera', value: 'serverId' },
-        { text: 'Data utworzenia', value: 'date' },
+        { text: 'Id aplikacji', value: 'appId' },
+        { text: 'Data modyfikacji', value: 'date' },
       ],
     }
   },
   mounted() {
-    const urls = ['data/servers.json', 'data/apps.json', 'data/tasks.json']
-
-    urls.forEach((url) =>
-      fetch(url)
-        .then((response) => response.json())
-        .then((resp) => {
-          if (url.includes('servers')) this.servers = resp
-          else if (url.includes('apps')) this.apps = resp
-          else this.tasks = resp
-        })
-    )
+    this.fetchData()
   },
   methods: {
-    handleShowServerDetails(item) {},
+    fetchData() {
+      const urls = [
+        'http://localhost:3000/servers',
+        'http://localhost:3000/apps',
+        'http://localhost:3000/tasks',
+      ]
 
-    handleAddServer() {
+      urls.forEach((url) =>
+        fetch(url)
+          .then((response) => response.json())
+          .then((resp) => {
+            if (url.includes('servers')) this.servers = resp
+            else if (url.includes('apps')) this.apps = resp
+            else this.tasks = resp
+          })
+      )
+    },
+
+    handleShowServerDetails(item) {
+      this.showEdit = !this.showEdit
+      this.itemToEdit = item
+    },
+
+    handleAdd(element) {
       this.showDialog = !this.showDialog
-      this.clicedElement = 'server'
+      if (element === 'server') {
+        this.clickedElement = {
+          type: 'servers',
+          title: 'Dodaj serwer',
+          color: 'primary',
+        }
+      } else if (element === 'app') {
+        this.clickedElement = {
+          type: 'apps',
+          title: 'Dodaj Aplikacje',
+          color: 'green',
+          addServer: true,
+        }
+      } else {
+        this.clickedElement = {
+          type: 'tasks',
+          title: 'Dodaj taska',
+          color: 'red',
+          addServer: true,
+          addApp: true,
+        }
+      }
     },
   },
 }
 </script>
 
-<style>
+<style scoped>
 .tableEl {
   width: 100%;
   margin: 0 auto;
   box-shadow: 0 0 5px rgb(204, 204, 204);
 }
-
+.tableEl >>> tbody tr :hover {
+  cursor: pointer;
+}
 .button-add {
   width: 100%;
   max-width: 280px;
