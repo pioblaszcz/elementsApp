@@ -1,11 +1,12 @@
 <template>
-  <v-row>
+  <v-row class="contaienrEl d-flex">
     <v-col
       cols="2.5"
-      class="mt-7 mr-2 d-flex rounded-lg flex-column align-center button-container"
+      class="mt-4 mr-2 d-flex rounded-lg flex-column align-center button-container"
     >
       <v-btn
-        color="primary"
+        color="transparent"
+        prepend-icon="$vuetify"
         class="button-add"
         elevation="2"
         x-large
@@ -13,7 +14,7 @@
         >{{ $t('addServer__btn') }}</v-btn
       >
       <v-btn
-        color="green"
+        color="transparent"
         class="button-add mt-4 mb-4"
         elevation="2"
         x-large
@@ -21,7 +22,7 @@
         >{{ $t('addApp__btn') }}</v-btn
       >
       <v-btn
-        color="red"
+        color="transparent"
         class="button-add"
         elevation="2"
         x-large
@@ -29,25 +30,25 @@
         >{{ $t('addTask__btn') }}</v-btn
       >
     </v-col>
-    <v-col cols="9" class="mt-4">
+    <v-col cols="9" class="mt-4 tablesContainer">
       <v-skeleton-loader
         v-if="isLoading"
         class="mx-auto border"
-        max-width="80%"
+        max-width="100%"
         max-height="25vh"
         type="table"
       ></v-skeleton-loader>
       <v-skeleton-loader
         v-if="isLoading"
         class="mx-auto border my-5"
-        max-width="80%"
+        max-width="100%"
         max-height="25vh"
         type="table"
       ></v-skeleton-loader>
       <v-skeleton-loader
         v-if="isLoading"
         class="mx-auto border"
-        max-width="80%"
+        max-width="100%"
         max-height="25vh"
         type="table"
       ></v-skeleton-loader>
@@ -226,9 +227,19 @@ export default {
 .button-add {
   width: 100%;
   max-width: 280px;
+  box-shadow: 0 0 5px rgb(204, 204, 204) !important;
 }
 .button-container {
-  box-shadow: 0 0 5px rgb(204, 204, 204);
-  max-height: 85vh;
+  /* box-shadow: 0 0 5px rgb(204, 204, 204);
+  max-height: 85vh; */
+}
+
+.tablesContainer {
+  margin: 0 auto;
+}
+
+.contaienrEl {
+  max-width: 90% !important;
+  margin: 0 auto;
 }
 </style>

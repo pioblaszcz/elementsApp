@@ -66,6 +66,34 @@
       "type": "server",
       "date": "14-09-2023 ",
       "id": 7
+    },
+    {
+      "name": "asdasd",
+      "description": "",
+      "type": "server",
+      "date": "14-09-2023",
+      "id": 8
+    },
+    {
+      "name": "asdasd",
+      "description": "as",
+      "type": "server",
+      "date": "14-09-2023",
+      "id": 9
+    },
+    {
+      "name": "asd",
+      "description": "as",
+      "type": "server",
+      "date": "14-09-2023",
+      "id": 10
+    },
+    {
+      "name": "Nowy serwer",
+      "description": "opis serweru",
+      "type": "server",
+      "date": "14-09-2023",
+      "id": 11
     }
   ],
   "apps": [
