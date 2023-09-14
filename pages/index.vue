@@ -1,13 +1,16 @@
 <template>
   <v-row>
-    <v-col cols="3" class="mt-4 d-flex flex-column align-center">
+    <v-col
+      cols="2.5"
+      class="mt-7 mr-2 d-flex rounded-lg flex-column align-center button-container"
+    >
       <v-btn
         color="primary"
         class="button-add"
         elevation="2"
         x-large
         @click="handleAdd('server')"
-        >Dodaj Serwer</v-btn
+        >{{ $t('addServer__btn') }}</v-btn
       >
       <v-btn
         color="green"
@@ -15,7 +18,7 @@
         elevation="2"
         x-large
         @click="handleAdd('app')"
-        >Dodaj Aplikacje</v-btn
+        >{{ $t('addApp__btn') }}</v-btn
       >
       <v-btn
         color="red"
@@ -23,17 +26,31 @@
         elevation="2"
         x-large
         @click="handleAdd('task')"
-        >Dodaj Taska</v-btn
+        >{{ $t('addTask__btn') }}</v-btn
       >
     </v-col>
     <v-col cols="9" class="mt-4">
-      <v-overlay :value="isLoading">
-        <v-progress-circular
-          indeterminate
-          size="64"
-          color="primary"
-        ></v-progress-circular>
-      </v-overlay>
+      <v-skeleton-loader
+        v-if="isLoading"
+        class="mx-auto border"
+        max-width="80%"
+        max-height="25vh"
+        type="table"
+      ></v-skeleton-loader>
+      <v-skeleton-loader
+        v-if="isLoading"
+        class="mx-auto border my-5"
+        max-width="80%"
+        max-height="25vh"
+        type="table"
+      ></v-skeleton-loader>
+      <v-skeleton-loader
+        v-if="isLoading"
+        class="mx-auto border"
+        max-width="80%"
+        max-height="25vh"
+        type="table"
+      ></v-skeleton-loader>
       <v-data-table
         v-if="servers !== null && !isLoading"
         :headers="headersServ"
@@ -93,42 +110,51 @@ export default {
       showDialog: false,
       showEdit: false,
       itemToEdit: {},
-      headersServ: [
-        {
-          text: 'Serwery',
-          align: 'center',
-          sortable: false,
-          value: 'name',
-        },
-        { text: 'Opis', value: 'description' },
-        { text: 'Id', value: 'id' },
-        { text: 'Data modyfikacji', value: 'date' },
-      ],
-      headersApp: [
-        {
-          text: 'Aplikacje',
-          align: 'center',
-          sortable: false,
-          value: 'name',
-        },
-        { text: 'Opis', value: 'description' },
-        { text: 'Id', value: 'id' },
-        { text: 'Id serwera', value: 'serverId' },
-        { text: 'Data modyfikacji', value: 'date' },
-      ],
-      headersTask: [
-        {
-          text: 'Taski',
-          align: 'center',
-          sortable: false,
-          value: 'name',
-        },
-        { text: 'Opis', value: 'description' },
-        { text: 'Id serwera', value: 'serverId' },
-        { text: 'Id aplikacji', value: 'appId' },
-        { text: 'Data modyfikacji', value: 'date' },
-      ],
     }
+  },
+  computed: {
+    headersServ: function () {
+      return [
+        {
+          text: this.$t('servers'),
+          align: 'center',
+          sortable: false,
+          value: 'name',
+        },
+        { text: this.$t('desc'), value: 'description' },
+        { text: 'Id', value: 'id' },
+        { text: this.$t('date'), value: 'date' },
+      ]
+    },
+    headersApp: function () {
+      return [
+        {
+          text: this.$t('servers'),
+          align: 'center',
+          sortable: false,
+          value: 'name',
+        },
+        { text: this.$t('desc'), value: 'description' },
+        { text: 'Id', value: 'id' },
+        { text: this.$t('serverId'), value: 'serverId' },
+        { text: this.$t('date'), value: 'date' },
+      ]
+    },
+    headersTask: function () {
+      return [
+        {
+          text: this.$t('servers'),
+          align: 'center',
+          sortable: false,
+          value: 'name',
+        },
+        { text: this.$t('desc'), value: 'description' },
+        { text: 'Id', value: 'id' },
+        { text: this.$t('serverId'), value: 'serverId' },
+        { text: this.$t('appId'), value: 'appId' },
+        { text: this.$t('date'), value: 'date' },
+      ]
+    },
   },
   mounted() {
     this.fetchData()
@@ -200,5 +226,9 @@ export default {
 .button-add {
   width: 100%;
   max-width: 280px;
+}
+.button-container {
+  box-shadow: 0 0 5px rgb(204, 204, 204);
+  max-height: 85vh;
 }
 </style>

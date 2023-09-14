@@ -33,13 +33,30 @@ export default {
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
-    '@nuxtjs/i18n'
+    'nuxt-i18n',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-    
-  ],
+  i18n: {
+    locales: [
+      {
+        code: 'pl',
+        name: 'Polish',
+      },
+      {
+        code: 'en',
+        name: 'English',
+      },
+    ],
+    defaultLocale: 'en',
+    vueI18n: {
+      fallbackLocale: 'en',
+      messages: {
+        en: require('./locales/en.json'), 
+        pl: require('./locales/pl.json'),
+      },
+    },
+  },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {

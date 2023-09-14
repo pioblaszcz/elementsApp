@@ -1,0 +1,12 @@
+
+    {
+        "title": "Aplikacja lista",
+        "addServer__btn": "Dodaj serwer",
+        "addApp__btn": "Dodaj aplikacje",
+        "addTask__btn": "Dodaj taska",
+        "servers": "Serwery",
+        "desc": "Opis",
+        "date": "Data modyfikacji",
+        "serverId": "Id serwera",
+        "appId": "Id aplikacji"
+    }
