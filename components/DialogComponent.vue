@@ -25,8 +25,8 @@
         ></v-text-field>
         <v-select
           v-if="element.addServer"
-          required
           v-model="inputServerId"
+          required
           :rules="serverIdRules"
           :items="serverItems"
           item-value="id"
@@ -35,8 +35,8 @@
         ></v-select>
         <v-select
           v-if="element.addApp"
-          required
           v-model="inputAppId"
+          required
           :items="appItems"
           item-value="id"
           item-text="name"
@@ -47,7 +47,16 @@
         </v-btn>
       </v-form>
       <v-card-actions class="justify-end">
-        <v-btn text @click="dialog = false">Close</v-btn>
+        <v-btn
+          text
+          @click="
+            () => {
+              dialog = false
+              $refs.form.resetValidation()
+            }
+          "
+          >Close</v-btn
+        >
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -130,7 +139,7 @@ export default {
           ? `0${new Date().getMonth() + 1}`
           : new Date().getMonth() + 1
 
-      const currentDate = `${day}-${month}-${new Date().getFullYear()} `
+      const currentDate = `${day}-${month}-${new Date().getFullYear()}`
 
       const elementBody = {
         name: this.inputName,

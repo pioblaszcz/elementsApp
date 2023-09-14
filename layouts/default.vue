@@ -82,12 +82,14 @@ export default {
           to: '/servers',
         },
         {
-          title: 'Taski',
-          to: '/tasks',
-        },
-        {
+          icon: 'mdi-android',
           title: 'Aplikacje',
           to: '/apps',
+        },
+        {
+          icon: 'mdi-check-circle-outline',
+          title: 'Taski',
+          to: '/tasks',
         },
       ],
       miniVariant: false,

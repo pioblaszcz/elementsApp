@@ -27,31 +27,38 @@
       >
     </v-col>
     <v-col cols="9" class="mt-4">
+      <v-overlay :value="isLoading">
+        <v-progress-circular
+          indeterminate
+          size="64"
+          color="primary"
+        ></v-progress-circular>
+      </v-overlay>
       <v-data-table
-        v-if="servers !== null"
+        v-if="servers !== null && !isLoading"
         :headers="headersServ"
         :items="servers"
         :items-per-page="5"
         class="tableEl rounded-lg"
-        @click:row="handleShowServerDetails"
+        @click:row="handleShowDetails"
       >
       </v-data-table>
       <v-data-table
-        v-if="apps !== null"
+        v-if="apps !== null && !isLoading"
         :headers="headersApp"
         :items="apps"
-        class="tableEl mb-6 mt-6 rounded-lg"
-        @click:row="handleShowServerDetails"
         :items-per-page="5"
+        class="tableEl mb-6 mt-6 rounded-lg"
+        @click:row="handleShowDetails"
       ></v-data-table>
 
       <v-data-table
-        v-if="tasks !== null"
+        v-if="tasks !== null && !isLoading"
         :headers="headersTask"
         :items="tasks"
         :items-per-page="5"
-        @click:row="handleShowServerDetails"
         class="tableEl mb-6 mt-6 rounded-lg"
+        @click:row="handleShowDetails"
       ></v-data-table>
     </v-col>
     <dialog-component
@@ -78,6 +85,7 @@ export default {
   name: 'IndexPage',
   data() {
     return {
+      isLoading: false,
       servers: [],
       apps: [],
       tasks: [],
@@ -127,6 +135,7 @@ export default {
   },
   methods: {
     fetchData() {
+      this.isLoading = true
       const urls = [
         'http://localhost:3000/servers',
         'http://localhost:3000/apps',
@@ -140,11 +149,12 @@ export default {
             if (url.includes('servers')) this.servers = resp
             else if (url.includes('apps')) this.apps = resp
             else this.tasks = resp
+            this.isLoading = false
           })
       )
     },
 
-    handleShowServerDetails(item) {
+    handleShowDetails(item) {
       this.showEdit = !this.showEdit
       this.itemToEdit = item
     },

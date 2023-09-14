@@ -3,23 +3,28 @@
     {
       "id": 0,
       "type": "server",
-      "name": "First server",
-      "description": "idk",
-      "date": "12-09-2023"
+      "name": "First server2",
+      "description": "idk22",
+      "date": "14-09-2023",
+      "serverId": null,
+      "appId": null
     },
     {
       "id": 1,
-      "name": "Second server",
+      "name": "Second server2",
       "type": "server",
       "description": "idk",
-      "date": "12-09-2023"
+      "date": "14-09-2023",
+      "serverId": null
     },
     {
       "name": "Nowy serwer",
       "description": "aktualniejszy",
       "type": "server",
-      "date": "13-09-2023 ",
-      "id": 2
+      "date": "14-09-2023",
+      "id": 2,
+      "serverId": null,
+      "appId": null
     },
     {
       "name": "Nowy serwer 2",
@@ -29,6 +34,38 @@
       "id": 3,
       "serverId": null,
       "appId": null
+    },
+    {
+      "name": "asdasa",
+      "description": "aasdasd",
+      "type": "server",
+      "date": "14-09-2023",
+      "id": 4,
+      "serverId": null,
+      "appId": null
+    },
+    {
+      "name": "Nowy serwer",
+      "description": "zaktualizowany serwer",
+      "type": "server",
+      "date": "14-09-2023 ",
+      "id": 5,
+      "serverId": null,
+      "appId": null
+    },
+    {
+      "name": "Serwer nowy",
+      "description": "jakis nowy serwer",
+      "type": "server",
+      "date": "14-09-2023 ",
+      "id": 6
+    },
+    {
+      "name": "asdas",
+      "description": "das",
+      "type": "server",
+      "date": "14-09-2023 ",
+      "id": 7
     }
   ],
   "apps": [
@@ -37,7 +74,7 @@
       "description": "pierwsza aplikacja",
       "type": "app",
       "serverId": 2,
-      "date": "13-09-2023 ",
+      "date": "14-09-2023",
       "id": 1,
       "appId": null
     },
@@ -50,12 +87,28 @@
       "id": 2
     },
     {
-      "name": "nfh",
+      "name": "nfhas",
       "description": "",
       "type": "app",
-      "serverId": 0,
-      "date": "13-09-2023 ",
+      "serverId": 1,
+      "date": "14-09-2023",
       "id": 3
+    },
+    {
+      "name": "Aplikacja 12",
+      "description": "aplikacja z serwera nowego",
+      "type": "app",
+      "serverId": 6,
+      "date": "14-09-2023 ",
+      "id": 4
+    },
+    {
+      "name": "asdasd",
+      "description": "",
+      "type": "app",
+      "serverId": 1,
+      "date": "14-09-2023",
+      "id": 5
     }
   ],
   "tasks": [
@@ -64,7 +117,7 @@
       "description": "",
       "type": "task",
       "serverId": 3,
-      "appId": 1,
+      "appId": 2,
       "date": "13-09-2023 ",
       "id": 1
     },
@@ -72,9 +125,9 @@
       "name": "New task 2",
       "description": "asdasd",
       "type": "task",
-      "serverId": 0,
-      "appId": 1,
-      "date": "13-09-2023 ",
+      "serverId": 3,
+      "appId": 2,
+      "date": "14-09-2023",
       "id": 2
     }
   ]

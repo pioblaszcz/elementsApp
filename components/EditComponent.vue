@@ -25,8 +25,8 @@
         ></v-text-field>
         <v-select
           v-if="inputServerId !== null"
-          required
           v-model="inputServerId"
+          required
           :rules="serverIdRules"
           :items="serverItems"
           item-value="id"
@@ -35,8 +35,8 @@
         ></v-select>
         <v-select
           v-if="inputAppId !== null"
-          required
           v-model="inputAppId"
+          required
           :items="appItems"
           item-value="id"
           item-text="name"
@@ -73,15 +73,24 @@ export default {
     },
     servers: {
       type: Array,
-      required: true,
+      required: false,
+      default() {
+        return []
+      },
     },
     apps: {
       type: Array,
-      required: true,
+      required: false,
+      default() {
+        return []
+      },
     },
     tasks: {
       type: Array,
-      required: true,
+      required: false,
+      default() {
+        return []
+      },
     },
     upgradeFetch: {
       type: Function,
@@ -141,9 +150,22 @@ export default {
   },
   methods: {
     handleEdit() {
+      const day =
+        new Date().getDate() < 10
+          ? `0${new Date().getDate()}`
+          : new Date().getDate()
+
+      const month =
+        new Date().getMonth() + 1 < 10
+          ? `0${new Date().getMonth() + 1}`
+          : new Date().getMonth() + 1
+
+      const currentDate = `${day}-${month}-${new Date().getFullYear()}`
+
       const body = {
         name: this.name,
         description: this.description,
+        date: currentDate,
       }
 
       if (this.serverItems) body.serverId = this.inputServerId

@@ -1,32 +1,93 @@
 <template>
-    <div v-if="tasks!==null" class="d-flex flex-column align-center">
-          <v-btn
-            v-for="server in servers" 
-            :key="server.id"
-            outlined
-            elevation="4"
-            class="mb-4 buttonEl"
-            @click="showDetails"
-          >
-          {{ server.name }}
-          </v-btn>
-        </div>
-    </template>
-    
-    <script>
-  
-    export default {
-        name: 'Server',
-        data(){
-        return{
-          servers: null,
-        }
+  <div>
+    <v-overlay :value="isLoading">
+      <v-progress-circular
+        indeterminate
+        size="64"
+        color="primary"
+      ></v-progress-circular>
+    </v-overlay>
+    <v-data-table
+      v-if="servers !== null"
+      :headers="headersServ"
+      :items="servers"
+      :items-per-page="10"
+      :search="search"
+      class="tableEl rounded-lg"
+      @click:row="handleShowServerDetails"
+    >
+      <template #top>
+        <v-text-field
+          v-model="search"
+          label="Szukaj po nazwie"
+          class="mx-4"
+        ></v-text-field>
+      </template>
+    </v-data-table>
+    <edit-component
+      v-model="showEdit"
+      :item="itemToEdit"
+      :element="clickedElement"
+      :upgrade-fetch="fetchData"
+    />
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'Server',
+  data() {
+    return {
+      isLoading: false,
+      search: '',
+      servers: null,
+      showEdit: false,
+      clickedElement: {
+        type: 'servers',
+        color: 'primary',
       },
-      mounted() {
-        fetch('data/servers.json')
-          .then(response => response.json())
-          .then(resp => {this.servers = resp})
-      }
+      itemToEdit: {},
+      headersServ: [
+        {
+          text: 'Serwery',
+          align: 'center',
+          sortable: false,
+          value: 'name',
+        },
+        { text: 'Opis', value: 'description' },
+        { text: 'Id', value: 'id' },
+        { text: 'Data modyfikacji', value: 'date' },
+      ],
     }
-    </script>
-    
+  },
+  mounted() {
+    this.fetchData()
+  },
+  methods: {
+    fetchData() {
+      this.isLoading = true
+      fetch('http://localhost:3000/servers')
+        .then((response) => response.json())
+        .then((resp) => {
+          this.servers = resp
+          this.isLoading = false
+        })
+    },
+    handleShowServerDetails(item) {
+      this.showEdit = !this.showEdit
+      this.itemToEdit = item
+    },
+  },
+}
+</script>
+
+<style scoped>
+.tableEl {
+  width: 80%;
+  margin: 0 auto;
+  box-shadow: 0 0 5px rgb(204, 204, 204);
+}
+.tableEl >>> tbody tr :hover {
+  cursor: pointer;
+}
+</style>
