@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import logo from '../static/images/logoVectio.png'
+import logo from '../static/images/logoVectioLong.png'
 
 export default {
   name: 'DefaultLayout',
@@ -105,11 +105,11 @@ export default {
 }
 
 .logo {
-  height: 100%;
+  height: 100px;
 }
 
 .logo__item {
-  width: 45px;
+  width: 105px;
 }
 
 .buttonLang {
