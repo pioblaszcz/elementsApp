@@ -12,13 +12,13 @@
       :items="servers"
       item-value="id"
       item-text="name"
-      label="Filtruj po serwerze"
+      :label="$t('filterByServer')"
       class="filtrByServerInput"
       @input="filterByServer"
     ></v-autocomplete>
     <v-data-table
       v-if="apps !== null"
-      :headers="headerApps"
+      :headers="headersApp"
       :items="appsCopy"
       :items-per-page="10"
       :search="search"
@@ -28,7 +28,7 @@
       <template #top>
         <v-text-field
           v-model="search"
-          label="Szukaj po nazwie"
+          :label="$t('searchByName')"
           class="mx-4"
         ></v-text-field>
       </template>
@@ -60,19 +60,23 @@ export default {
         color: 'green',
       },
       itemToEdit: {},
-      headerApps: [
+    }
+  },
+  computed: {
+    headersApp: function () {
+      return [
         {
-          text: 'Aplikacje',
+          text: this.$t('apps'),
           align: 'center',
           sortable: false,
           value: 'name',
         },
-        { text: 'Opis', value: 'description' },
+        { text: this.$t('desc'), value: 'description' },
         { text: 'Id', value: 'id' },
-        { text: 'Id serwera', value: 'serverId' },
-        { text: 'Data modyfikacji', value: 'date' },
-      ],
-    }
+        { text: this.$t('serverId'), value: 'serverId' },
+        { text: this.$t('date'), value: 'date' },
+      ]
+    },
   },
   mounted() {
     this.fetchData()

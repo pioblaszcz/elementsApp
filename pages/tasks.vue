@@ -12,7 +12,7 @@
       :items="servers"
       item-value="id"
       item-text="name"
-      label="Filtruj po serwerze"
+      :label="$t('filterByServer')"
       class="filtrByServerInput"
       @input="(item) => filterTable(item, 'server')"
     ></v-autocomplete>
@@ -21,13 +21,13 @@
       :items="apps"
       item-value="id"
       item-text="name"
-      label="Filtruj po aplikacji"
+      :label="$t('filterByApp')"
       class="filtrByServerInput"
       @input="(item) => filterTable(item, 'app')"
     ></v-autocomplete>
     <v-data-table
       v-if="tasks !== null"
-      :headers="headerTasks"
+      :headers="headersTask"
       :items="tasksCopy"
       :items-per-page="10"
       :search="search"
@@ -37,7 +37,7 @@
       <template #top>
         <v-text-field
           v-model="search"
-          label="Szukaj po nazwie"
+          :label="$t('searchByName')"
           class="mx-4"
         ></v-text-field>
       </template>
@@ -74,20 +74,24 @@ export default {
       itemToEdit: {},
       selectedServer: null,
       selectedApp: null,
-      headerTasks: [
+    }
+  },
+  computed: {
+    headersTask: function () {
+      return [
         {
-          text: 'Taski',
+          text: this.$t('tasks'),
           align: 'center',
           sortable: false,
           value: 'name',
         },
-        { text: 'Opis', value: 'description' },
+        { text: this.$t('desc'), value: 'description' },
         { text: 'Id', value: 'id' },
-        { text: 'Id serwera', value: 'serverId' },
-        { text: 'Id aplikacji', value: 'appId' },
-        { text: 'Data modyfikacji', value: 'date' },
-      ],
-    }
+        { text: this.$t('serverId'), value: 'serverId' },
+        { text: this.$t('appId'), value: 'appId' },
+        { text: this.$t('date'), value: 'date' },
+      ]
+    },
   },
   mounted() {
     this.fetchData()

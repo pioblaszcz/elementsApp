@@ -1,11 +1,24 @@
 {
     "title": "List App",
+    "apps": "Applications",
+    "tasks": "Tasks",
     "addServer__btn": "Add server",
     "addApp__btn": "Add App",
     "addTask__btn": "Add Task",
+    "editElement": "Edit element",
     "servers": "Servers",
+    "name": "Name",
     "desc": "Description",
     "date": "Modification date",
     "serverId": "Server Id",
-    "appId": "App Id"
+    "appId": "App Id",
+    "add": "Add",
+    "edit": "Edit",
+    "close": "Close",
+    "choseServer": "Chose server",
+    "choseApp": "Chose Application",
+    "searchByName": "Search by name",
+    "filterByServer": "Filter by server",
+    "filterByApp": "Filter by app",
+    "delateError": "U cant delete the server when an app or task is connected to it"
 }

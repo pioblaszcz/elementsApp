@@ -130,7 +130,7 @@ export default {
     headersApp: function () {
       return [
         {
-          text: this.$t('servers'),
+          text: this.$t('apps'),
           align: 'center',
           sortable: false,
           value: 'name',
@@ -144,7 +144,7 @@ export default {
     headersTask: function () {
       return [
         {
-          text: this.$t('servers'),
+          text: this.$t('tasks'),
           align: 'center',
           sortable: false,
           value: 'name',
@@ -191,20 +191,20 @@ export default {
       if (element === 'server') {
         this.clickedElement = {
           type: 'servers',
-          title: 'Dodaj serwer',
+          title: this.$t('addServer__btn'),
           color: 'primary',
         }
       } else if (element === 'app') {
         this.clickedElement = {
           type: 'apps',
-          title: 'Dodaj Aplikacje',
+          title: this.$t('addApp__btn'),
           color: 'green',
           addServer: true,
         }
       } else {
         this.clickedElement = {
           type: 'tasks',
-          title: 'Dodaj taska',
+          title: this.$t('addTask__btn'),
           color: 'red',
           addServer: true,
           addApp: true,
@@ -229,11 +229,6 @@ export default {
   max-width: 280px;
   box-shadow: 0 0 5px rgb(204, 204, 204) !important;
 }
-.button-container {
-  /* box-shadow: 0 0 5px rgb(204, 204, 204);
-  max-height: 85vh; */
-}
-
 .tablesContainer {
   margin: 0 auto;
 }

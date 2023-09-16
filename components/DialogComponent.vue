@@ -14,14 +14,14 @@
           :counter="16"
           :rules="nameRules"
           required
-          label="Nazwa"
+          :label="$t('name')"
         ></v-text-field>
         <v-text-field
           v-model="inputDesc"
           :counter="30"
           :rules="descriptionRules"
           required
-          label="Opis"
+          :label="$t('desc')"
         ></v-text-field>
         <v-select
           v-if="element.addServer"
@@ -31,7 +31,7 @@
           :items="serverItems"
           item-value="id"
           item-text="name"
-          label="Wybierz serwer"
+          :label="$t('choseServer')"
         ></v-select>
         <v-select
           v-if="element.addApp"
@@ -40,23 +40,14 @@
           :items="appItems"
           item-value="id"
           item-text="name"
-          label="Wybierz aplikacje"
+          :label="$t('choseApp')"
         ></v-select>
         <v-btn :color="element.color" class="mr-4 submit" @click="onSubmit">
-          Add
+          {{ $t('add') }}
         </v-btn>
       </v-form>
       <v-card-actions class="justify-end">
-        <v-btn
-          text
-          @click="
-            () => {
-              dialog = false
-              $refs.form.resetValidation()
-            }
-          "
-          >Close</v-btn
-        >
+        <v-btn text @click="handleClose"> {{ $t('close') }}</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -161,6 +152,15 @@ export default {
         },
         body: JSON.stringify(elementBody),
       }).then(() => this.upgradeFetch())
+    },
+
+    handleClose() {
+      this.dialog = false
+      this.inputDesc = ''
+      this.inputName = ''
+      this.inputServerId = null
+      this.inputAppId = null
+      this.$refs.form.resetValidation()
     },
 
     onSubmit() {

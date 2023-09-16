@@ -19,7 +19,7 @@
       <template #top>
         <v-text-field
           v-model="search"
-          label="Szukaj po nazwie"
+          :label="$t('searchByName')"
           class="mx-4"
         ></v-text-field>
       </template>
@@ -47,18 +47,22 @@ export default {
         color: 'primary',
       },
       itemToEdit: {},
-      headersServ: [
+    }
+  },
+  computed: {
+    headersServ: function () {
+      return [
         {
-          text: 'Serwery',
+          text: this.$t('servers'),
           align: 'center',
           sortable: false,
           value: 'name',
         },
-        { text: 'Opis', value: 'description' },
+        { text: this.$t('desc'), value: 'description' },
         { text: 'Id', value: 'id' },
-        { text: 'Data modyfikacji', value: 'date' },
-      ],
-    }
+        { text: this.$t('date'), value: 'date' },
+      ]
+    },
   },
   mounted() {
     this.fetchData()

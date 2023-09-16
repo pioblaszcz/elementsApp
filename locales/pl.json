@@ -1,12 +1,25 @@
 
     {
         "title": "Aplikacja lista",
+        "apps": "Aplikacje",
+        "tasks": "Taski",
         "addServer__btn": "Dodaj serwer",
         "addApp__btn": "Dodaj aplikacje",
         "addTask__btn": "Dodaj taska",
+        "editElement": "Edytuj element",
         "servers": "Serwery",
+        "name": "Nazwa",
         "desc": "Opis",
         "date": "Data modyfikacji",
         "serverId": "Id serwera",
-        "appId": "Id aplikacji"
+        "appId": "Id aplikacji",
+        "add": "Dodaj",
+        "edit": "Edytuj",
+        "close": "Zamknij",
+        "choseServer": "Wybierz serwer",
+        "choseApp": "Wybierz aplikacje",
+        "searchByName": "Szukaj po nazwie",
+        "filterByServer": "Filtruj po serwerze",
+        "filterByApp": "Filtruj po aplikacji",
+        "delateError": "Nie możesz usunąć serwera gdy podpięta do niego jest aplikacja lub task"
     }

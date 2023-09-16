@@ -17,6 +17,9 @@ export default {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
+  server: {
+    port: 4500,
+},
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
@@ -38,6 +41,7 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   i18n: {
+    defaultLocale: 'en',
     locales: [
       {
         code: 'pl',
@@ -48,7 +52,6 @@ export default {
         name: 'English',
       },
     ],
-    defaultLocale: 'en',
     vueI18n: {
       fallbackLocale: 'en',
       messages: {

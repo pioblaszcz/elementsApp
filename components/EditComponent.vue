@@ -6,7 +6,9 @@
   >
     <v-card>
       <v-toolbar :color="color" dark>
-        <p class="font-weight-medium text-center title">Edytuj element</p>
+        <p class="font-weight-medium text-center title">
+          {{ $t('editElement') }}
+        </p>
       </v-toolbar>
       <v-form ref="form" lazy-validation class="form">
         <v-text-field
@@ -14,14 +16,14 @@
           :counter="16"
           :rules="nameRules"
           required
-          label="Nazwa"
+          :label="$t('name')"
         ></v-text-field>
         <v-text-field
           v-model="description"
           :counter="30"
           :rules="descriptionRules"
           required
-          label="Opis"
+          :label="$t('desc')"
         ></v-text-field>
         <v-select
           v-if="inputServerId !== null"
@@ -31,23 +33,28 @@
           :items="serverItems"
           item-value="id"
           item-text="name"
-          label="Wybierz serwer"
+          :label="$t('choseServer')"
         ></v-select>
         <v-select
           v-if="inputAppId !== null"
           v-model="inputAppId"
-          required
           :items="appItems"
           item-value="id"
           item-text="name"
-          label="Wybierz aplikacje"
+          :label="$t('choseApp')"
         ></v-select>
         <v-btn :color="color" class="mr-4 submit" @click="onSubmit">
-          Edit
+          {{ $t('edit') }}
         </v-btn>
+        <v-btn color="red" :disabled="disableDelate" @click="handleDelate">
+          DELETE
+        </v-btn>
+        <p v-if="disableDelate" class="red--text font-bold mt-1 disableError">
+          {{ $t('delateError') }}
+        </p>
       </v-form>
       <v-card-actions class="justify-end">
-        <v-btn text @click="edit = false">Close</v-btn>
+        <v-btn text @click="edit = false">{{ $t('close') }}</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -104,6 +111,7 @@ export default {
       description: '',
       serverItems: null,
       appItems: null,
+      taskItems: null,
       type: '',
       inputServerId: null,
       inputAppId: null,
@@ -113,6 +121,18 @@ export default {
       descriptionRules,
       serverIdRules,
     }
+  },
+  computed: {
+    disableDelate: function () {
+      if (this.item.type === 'server')
+        return (
+          this.appItems.findIndex((app) => app.serverId === this.item.id) >
+            -1 ||
+          this.taskItems.findIndex((task) => task.serverId === this.item.id) >
+            -1
+        )
+      else return false
+    },
   },
   watch: {
     value: {
@@ -147,6 +167,11 @@ export default {
         this.appItems = a
       },
     },
+    tasks: {
+      handler(t) {
+        this.taskItems = t
+      },
+    },
   },
   methods: {
     handleEdit() {
@@ -179,6 +204,15 @@ export default {
         },
       }).then(() => this.upgradeFetch())
     },
+    handleDelate() {
+      this.edit = false
+      fetch(`http://localhost:3000/${this.type}s/${this.id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      }).then(() => this.upgradeFetch())
+    },
     onSubmit() {
       this.$nextTick(() => {
         if (this.$refs.form.validate()) {
@@ -190,5 +224,8 @@ export default {
   },
 }
 </script>
-
-<style></style>
+<style>
+.disableError {
+  font-size: 12px;
+}
+</style>
