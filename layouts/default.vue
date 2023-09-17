@@ -1,5 +1,6 @@
 <template>
-  <v-app dark>
+  <v-app dark class="wraper">
+    <div class="app"></div>
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
@@ -100,7 +101,7 @@ export default {
 </script>
 <style>
 .navigationEl {
-  box-shadow: 2px 0 7px #077a8e !important;
+  box-shadow: 2px 0 7px #163257 !important;
 }
 
 .logo {
@@ -124,5 +125,20 @@ export default {
 
 .gb {
   background-image: url('../static/images/gb.png');
+}
+
+.app {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../static/images/bgc3.jpg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+.wraper {
+  background-color: #010005 !important;
 }
 </style>

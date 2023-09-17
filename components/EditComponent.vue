@@ -26,7 +26,7 @@
           :label="$t('desc')"
         ></v-text-field>
         <v-select
-          v-if="type === 'server' || type === 'task'"
+          v-if="type === 'app' || type === 'task'"
           v-model="inputServerId"
           required
           :rules="serverIdRules"
