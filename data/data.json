@@ -11,10 +11,12 @@
     },
     {
       "name": "Serwer2",
-      "description": "",
+      "description": "Opis serwera 2",
       "type": "server",
       "date": "17-09-2023",
-      "id": 2
+      "id": 2,
+      "serverId": 1,
+      "appId": null
     }
   ],
   "apps": [

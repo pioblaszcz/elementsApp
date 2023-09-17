@@ -28,7 +28,7 @@
       <v-btn icon @click.stop="miniVariant = !miniVariant">
         <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
       </v-btn>
-      <v-toolbar-title class="logo d-flex align-center">
+      <v-toolbar-title class="ml-4 logo d-flex align-center">
         <v-img class="logo__item" :lazy-src="logo" :src="logo" />
       </v-toolbar-title>
       <v-spacer />
@@ -43,7 +43,6 @@
         <Nuxt />
       </v-container>
     </v-main>
-
     <v-footer app>
       <span>&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
