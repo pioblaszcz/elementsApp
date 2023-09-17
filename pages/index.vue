@@ -137,7 +137,7 @@ export default {
         },
         { text: this.$t('desc'), value: 'description' },
         { text: 'Id', value: 'id' },
-        { text: this.$t('serverId'), value: 'serverId' },
+        { text: this.$t('serverId'), value: 'server' },
         { text: this.$t('date'), value: 'date' },
       ]
     },
@@ -151,8 +151,8 @@ export default {
         },
         { text: this.$t('desc'), value: 'description' },
         { text: 'Id', value: 'id' },
-        { text: this.$t('serverId'), value: 'serverId' },
-        { text: this.$t('appId'), value: 'appId' },
+        { text: this.$t('serverId'), value: 'server' },
+        { text: this.$t('appId'), value: 'app' },
         { text: this.$t('date'), value: 'date' },
       ]
     },
@@ -161,7 +161,7 @@ export default {
     this.fetchData()
   },
   methods: {
-    fetchData() {
+    async fetchData() {
       this.isLoading = true
       const urls = [
         'http://localhost:3000/servers',
@@ -169,18 +169,32 @@ export default {
         'http://localhost:3000/tasks',
       ]
 
-      urls.forEach((url) =>
-        fetch(url)
-          .then((response) => response.json())
-          .then((resp) => {
-            if (url.includes('servers')) this.servers = resp
-            else if (url.includes('apps')) this.apps = resp
-            else this.tasks = resp
-            this.isLoading = false
+      for (let url in urls) {
+        url = urls[url]
+        const res = await fetch(url)
+        const data = await res.json()
+        if (url.includes('servers')) {
+          this.servers = data
+        } else if (url.includes('apps')) {
+          this.apps = data
+          this.apps.forEach((app) => {
+            const serverName = this.servers.filter((s) => s.id === app.serverId)
+            app.server = `(${app.serverId}) ${serverName[0].name}`
           })
-      )
+        } else {
+          this.tasks = data
+          this.tasks.forEach((task) => {
+            const serverName = this.servers.filter(
+              (s) => s.id === task.serverId
+            )
+            const appName = this.apps.filter((a) => a.id === task.appId)
+            task.server = `(${task.serverId}) ${serverName[0].name}`
+            if (appName[0]) task.app = `(${task.appId}) ${appName[0].name}`
+          })
+        }
+        this.isLoading = false
+      }
     },
-
     handleShowDetails(item) {
       this.showEdit = !this.showEdit
       this.itemToEdit = item

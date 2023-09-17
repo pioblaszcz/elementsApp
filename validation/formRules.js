@@ -1,13 +1,15 @@
+import Vue from "vue";
+
 export const nameRules = [
-    v => !!v || 'Nazwa jest wymagana',
-    v =>(v && v.replace(/\s/g, '').length > 0) || 'Nazwa nie może zawierać tylko spacji',
-    v => (v && v.length <= 16) || 'Nazwa musi być krótsza niż 16 znaków',
+    v => !!v || Vue.prototype.$nuxt.$options.i18n.t('rules.name'),
+    v =>(v && v.replace(/\s/g, '').length > 0) || Vue.prototype.$nuxt.$options.i18n.t('rules.nameSpace'),
+    v => (v && v.length <= 16) || Vue.prototype.$nuxt.$options.i18n.t('rules.nameMax'),
 ]
 
 export const descriptionRules = [
-    v => (!v || v.length <= 30) || 'Opis musi być krótszy niż 30 znaków',
+    v => (!v || v.length <= 30) || Vue.prototype.$nuxt.$options.i18n.t('rules.desc'),
 ]
 
 export const serverIdRules = [
-    v => v!==null || 'Podpięcie do serwera jest wymagane',
+    v => v!==null || Vue.prototype.$nuxt.$options.i18n.t('rules.serv'),
 ]

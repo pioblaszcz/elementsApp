@@ -1,184 +1,58 @@
 {
   "servers": [
     {
+      "name": "Serwer1",
+      "description": "Testowy serwer",
+      "type": "server",
+      "date": "17-09-2023",
       "id": 1,
-      "name": "Second server2",
-      "type": "server",
-      "description": "idk",
-      "date": "15-09-2023",
       "serverId": null,
       "appId": null
     },
     {
-      "name": "Nowy serwer",
-      "description": "aktualniejszy2",
-      "type": "server",
-      "date": "15-09-2023",
-      "id": 2,
-      "serverId": null,
-      "appId": null
-    },
-    {
-      "name": "asdasa",
-      "description": "aasdasd",
-      "type": "server",
-      "date": "14-09-2023",
-      "id": 4,
-      "serverId": null,
-      "appId": null
-    },
-    {
-      "name": "Nowy serwer",
-      "description": "zaktualizowany serwer",
-      "type": "server",
-      "date": "14-09-2023 ",
-      "id": 5,
-      "serverId": null,
-      "appId": null
-    },
-    {
-      "name": "Serwer nowy",
-      "description": "jakis nowy serwer",
-      "type": "server",
-      "date": "14-09-2023 ",
-      "id": 6
-    },
-    {
-      "name": "asdas",
-      "description": "das",
-      "type": "server",
-      "date": "14-09-2023 ",
-      "id": 7
-    },
-    {
-      "name": "asdasd",
+      "name": "Serwer2",
       "description": "",
       "type": "server",
-      "date": "14-09-2023",
-      "id": 8
-    },
-    {
-      "name": "asdasd",
-      "description": "as",
-      "type": "server",
-      "date": "14-09-2023",
-      "id": 9
-    },
-    {
-      "name": "Nowy serwer",
-      "description": "opis serweru",
-      "type": "server",
-      "date": "14-09-2023",
-      "id": 11
-    },
-    {
-      "name": "        ",
-      "description": "",
-      "type": "server",
-      "date": "15-09-2023",
-      "id": 13
-    },
-    {
-      "name": "xzczxc",
-      "description": "zxcxzczx",
-      "type": "server",
-      "date": "16-09-2023",
-      "id": 14
-    },
-    {
-      "name": "asdsad",
-      "description": "asd",
-      "type": "server",
-      "date": "16-09-2023",
-      "id": 15
-    },
-    {
-      "name": "ok",
-      "description": "",
-      "type": "server",
-      "date": "16-09-2023",
-      "id": 16
-    },
-    {
-      "name": "asd",
-      "description": "asd",
-      "type": "server",
-      "date": "16-09-2023",
-      "id": 17
-    },
-    {
-      "name": "asdsad",
-      "description": "asd",
-      "type": "server",
-      "date": "16-09-2023",
-      "id": 18
-    },
-    {
-      "name": "asd",
-      "description": "as",
-      "type": "server",
-      "date": "16-09-2023",
-      "id": 19
-    },
-    {
-      "name": "asd",
-      "description": "asd",
-      "type": "server",
-      "date": "16-09-2023",
-      "id": 20
-    },
-    {
-      "name": "asjdn",
-      "description": "as",
-      "type": "server",
-      "date": "16-09-2023",
-      "id": 21
-    },
-    {
-      "name": "asd",
-      "description": "asd",
-      "type": "server",
-      "date": "16-09-2023",
-      "id": 22
+      "date": "17-09-2023",
+      "id": 2
     }
   ],
   "apps": [
     {
-      "name": "nowa nazwa",
-      "description": "pierwsza aplikacja",
+      "name": "Aplikacja 1",
+      "description": "",
       "type": "app",
-      "serverId": 2,
-      "date": "14-09-2023",
-      "id": 1,
-      "appId": null
+      "serverId": 1,
+      "date": "17-09-2023",
+      "id": 1
     },
     {
-      "name": "ted",
-      "description": "dtr",
+      "name": "Aplikacja2",
+      "description": null,
       "type": "app",
       "serverId": 2,
-      "date": "15-09-2023",
+      "date": "17-09-2023",
       "id": 2
     }
   ],
   "tasks": [
     {
-      "name": "New task 2",
-      "description": "asdasd",
+      "name": "Task 1",
+      "description": "Task 1 podpięty do S1 i A1.",
       "type": "task",
-      "serverId": 2,
+      "serverId": 1,
       "appId": 1,
-      "date": "15-09-2023",
-      "id": 2
+      "date": "17-09-2023",
+      "id": 1
     },
     {
-      "name": "dfdt",
-      "description": "drtd",
+      "name": "Task2",
+      "description": "Opis taska 2",
       "type": "task",
       "serverId": 2,
-      "appId": 2,
-      "date": "15-09-2023",
-      "id": 4
+      "appId": null,
+      "date": "17-09-2023",
+      "id": 2
     }
   ]
 }

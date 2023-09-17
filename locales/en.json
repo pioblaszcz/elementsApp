@@ -20,5 +20,13 @@
     "searchByName": "Search by name",
     "filterByServer": "Filter by server",
     "filterByApp": "Filter by app",
-    "delateError": "U cant delete the server when an app or task is connected to it"
+    "delateError": "U cant delete the server when an app or task is connected to it",
+    "unpin": "Unpin app",
+    "rules": {
+        "name": "Name is required",
+        "nameSpace": "Name cannot consist of only spaces",
+        "nameMax": "Name must be shorter than 16 characters",
+        "desc": "Description must be shorter than 30 characters",
+        "serv": "Connection to the server is required"
+    }
 }

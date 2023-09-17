@@ -21,5 +21,13 @@
         "searchByName": "Szukaj po nazwie",
         "filterByServer": "Filtruj po serwerze",
         "filterByApp": "Filtruj po aplikacji",
-        "delateError": "Nie możesz usunąć serwera gdy podpięta do niego jest aplikacja lub task"
+        "delateError": "Nie możesz usunąć serwera gdy podpięta do niego jest aplikacja lub task",
+        "unpin": "Odepnij aplikacje",
+        "rules": {
+            "name": "Nazwa jesy wymagana",
+            "nameSpace": "Nazawa nie może składać się z samych spacji",
+            "nameMax": "Nazawa musi być krótsza niż 16 znaków",
+            "desc": "Opis musi być krótszy niż 30 znaków",
+            "serv": "Podpięcie do serwera jesy wymagane"
+        }
     }

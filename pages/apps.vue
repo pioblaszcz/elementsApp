@@ -21,6 +21,7 @@
       :headers="headersApp"
       :items="appsCopy"
       :items-per-page="10"
+      :custom-filter="customFilter"
       :search="search"
       class="tableEl rounded-lg"
       @click:row="handleShowAppDetails"
@@ -73,7 +74,7 @@ export default {
         },
         { text: this.$t('desc'), value: 'description' },
         { text: 'Id', value: 'id' },
-        { text: this.$t('serverId'), value: 'serverId' },
+        { text: this.$t('serverId'), value: 'server' },
         { text: this.$t('date'), value: 'date' },
       ]
     },
@@ -88,25 +89,38 @@ export default {
         this.appsCopy = this.apps
       }
     },
-
-    fetchData() {
+    async fetchData() {
       this.isLoading = true
       this.selectedServer = null
-      fetch('http://localhost:3000/apps')
-        .then((response) => response.json())
-        .then((resp) => {
-          this.apps = resp
-          this.appsCopy = resp
-          this.isLoading = false
-        })
-      fetch('http://localhost:3000/servers')
-        .then((response) => response.json())
-        .then((resp) => (this.servers = resp))
-    },
+      const urls = [
+        'http://localhost:3000/servers',
+        'http://localhost:3000/apps',
+      ]
 
+      for (let url in urls) {
+        url = urls[url]
+        const res = await fetch(url)
+        const data = await res.json()
+        if (url.includes('servers')) {
+          this.servers = data
+        } else if (url.includes('apps')) {
+          this.apps = data
+          this.apps = data
+          this.appsCopy = data
+          this.apps.forEach((app) => {
+            const serverName = this.servers.filter((s) => s.id === app.serverId)
+            app.server = `(${app.serverId}) ${serverName[0].name}`
+          })
+        }
+        this.isLoading = false
+      }
+    },
     handleShowAppDetails(item) {
       this.showEdit = !this.showEdit
       this.itemToEdit = item
+    },
+    customFilter(value, search, item) {
+      return item.name.toLowerCase().includes(search.toLowerCase())
     },
   },
 }

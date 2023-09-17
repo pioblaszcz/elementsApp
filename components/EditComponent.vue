@@ -26,7 +26,7 @@
           :label="$t('desc')"
         ></v-text-field>
         <v-select
-          v-if="inputServerId !== null"
+          v-if="type === 'server' || type === 'task'"
           v-model="inputServerId"
           required
           :rules="serverIdRules"
@@ -36,7 +36,7 @@
           :label="$t('choseServer')"
         ></v-select>
         <v-select
-          v-if="inputAppId !== null"
+          v-if="type === 'task'"
           v-model="inputAppId"
           :items="appItems"
           item-value="id"
@@ -110,7 +110,7 @@ export default {
       name: '',
       description: '',
       serverItems: null,
-      appItems: null,
+      appItems: [],
       taskItems: null,
       type: '',
       inputServerId: null,
@@ -164,7 +164,7 @@ export default {
     },
     apps: {
       handler(a) {
-        this.appItems = a
+        a.forEach((item) => this.appItems.push(item))
       },
     },
     tasks: {
@@ -172,6 +172,9 @@ export default {
         this.taskItems = t
       },
     },
+  },
+  mounted() {
+    this.appItems.push({ name: this.$t('unpin'), id: -1 })
   },
   methods: {
     handleEdit() {
@@ -194,7 +197,9 @@ export default {
       }
 
       if (this.serverItems) body.serverId = this.inputServerId
-      if (this.appItems) body.appId = this.inputAppId
+      if (this.appItems) {
+        body.appId = this.inputAppId !== -1 ? this.inputAppId : null
+      }
 
       fetch(`http://localhost:3000/${this.type}s/${this.id}`, {
         method: 'PATCH',

@@ -42,7 +42,11 @@
           item-text="name"
           :label="$t('choseApp')"
         ></v-select>
-        <v-btn :color="element.color" class="mr-4 submit" @click="onSubmit">
+        <v-btn
+          :color="element.color"
+          class="mr-4 mt-2 submit"
+          @click="onSubmit"
+        >
           {{ $t('add') }}
         </v-btn>
       </v-form>

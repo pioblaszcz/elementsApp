@@ -4,7 +4,7 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   ssr:false,
   head: {
-    titleTemplate: '%s - projectVue',
+    titleTemplate: 'Vectio Project',
     title: 'projectVue',
     htmlAttrs: {
       lang: 'en',

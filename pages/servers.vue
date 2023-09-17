@@ -11,6 +11,7 @@
       v-if="servers !== null"
       :headers="headersServ"
       :items="servers"
+      :custom-filter="customFilter"
       :items-per-page="10"
       :search="search"
       class="tableEl rounded-lg"
@@ -27,6 +28,8 @@
     <edit-component
       v-model="showEdit"
       :item="itemToEdit"
+      :apps="appItems"
+      :tasks="taskItems"
       :element="clickedElement"
       :upgrade-fetch="fetchData"
     />
@@ -42,6 +45,8 @@ export default {
       search: '',
       servers: null,
       showEdit: false,
+      appItems: [],
+      taskItems: [],
       clickedElement: {
         type: 'servers',
         color: 'primary',
@@ -76,10 +81,23 @@ export default {
           this.servers = resp
           this.isLoading = false
         })
+      fetch('http://localhost:3000/apps')
+        .then((response) => response.json())
+        .then((resp) => {
+          this.appItems = resp
+        })
+      fetch('http://localhost:3000/tasks')
+        .then((response) => response.json())
+        .then((resp) => {
+          this.taskItems = resp
+        })
     },
     handleShowServerDetails(item) {
       this.showEdit = !this.showEdit
       this.itemToEdit = item
+    },
+    customFilter(value, search, item) {
+      return item.name.toLowerCase().includes(search.toLowerCase())
     },
   },
 }
