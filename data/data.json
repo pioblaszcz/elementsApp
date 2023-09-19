@@ -21,14 +21,6 @@
   ],
   "apps": [
     {
-      "name": "Aplikacja 1",
-      "description": "",
-      "type": "app",
-      "serverId": 1,
-      "date": "17-09-2023",
-      "id": 1
-    },
-    {
       "name": "Aplikacja2",
       "description": null,
       "type": "app",
@@ -43,8 +35,8 @@
       "description": "Task 1 podpięty do S1 i A1.",
       "type": "task",
       "serverId": 1,
-      "appId": 1,
-      "date": "17-09-2023",
+      "appId": null,
+      "date": "18-09-2023",
       "id": 1
     },
     {

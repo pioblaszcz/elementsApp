@@ -29,6 +29,28 @@
         @click="handleAdd('task')"
         >{{ $t('addTask__btn') }}</v-btn
       >
+      <v-card class="mx-auto mt-8 mb-10 comment" elevation="2" max-width="280">
+        <v-card-text class="pb-0">
+          <div>Comment</div>
+          <div class="text--primary">
+            relating to or dependent on charity; charitable.<br />
+            "an eleemosynary educational institution."
+            <v-expand-transition>
+              <p v-show="reveal">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius,
+                aspernatur consectetur obcaecati excepturi inventore quod magni
+                itaque ipsa soluta veniam laboriosam recusandae quae nam maxime
+                incidunt eaque similique eum aperiam?
+              </p>
+            </v-expand-transition>
+          </div>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn text color="teal accent-4" @click="reveal = !reveal">
+            {{ reveal ? 'Hide comment' : 'Read More' }}
+          </v-btn>
+        </v-card-actions>
+      </v-card>
     </v-col>
     <v-col cols="9" class="mt-4 tablesContainer">
       <v-skeleton-loader
@@ -108,6 +130,7 @@ export default {
       apps: [],
       tasks: [],
       clickedElement: null,
+      reveal: false,
       showDialog: false,
       showEdit: false,
       itemToEdit: {},
@@ -250,5 +273,9 @@ export default {
 .contaienrEl {
   max-width: 90% !important;
   margin: 0 auto;
+}
+
+.comment {
+  box-shadow: 0 0 5px rgb(204, 204, 204) !important;
 }
 </style>
